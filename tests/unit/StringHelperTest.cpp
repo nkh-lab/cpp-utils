@@ -51,3 +51,21 @@ TEST(StringHelperTest, BytesToStrWithAllCustomSettings)
 
     EXPECT_STREQ(s.c_str(), "0x00--0x12--0x34--0x56--0x78--0x9A--0xBC--0xDE--0xFF");
 }
+
+TEST(StringHelperTest, GetStrFromBytesWithRightSize)
+{
+    uint8_t bytes[] = {0x12, 'a', 'b', 'c', 0x55, 0x00, 0x9A};
+
+    std::string s = StringHelper::GetStrFromBytes(&bytes[1], 3);
+
+    EXPECT_STREQ(s.c_str(), "abc");
+}
+
+TEST(StringHelperTest, GetStrFromBytesNullTerminated)
+{
+    uint8_t bytes[] = {0x12, 'a', 'b', 'c', 0x00, 0x00, 0x00, 0x00};
+
+    std::string s = StringHelper::GetStrFromBytes(&bytes[1], 6);
+
+    EXPECT_STREQ(s.c_str(), "abc");
+}

@@ -22,17 +22,25 @@ public:
     StringHelper() = delete;
 
     //
-    // Convert uint8_t bytes[] = {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF} to:
-    // "00 12 34 56 78 9a bc de ff"
-    // "00123456789abcdeff"
-    // "00--12--34--56--78--9a--bc--de--ff"
+    // Converts {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF} to:
+    // "00 12 34 56 78 9a bc de ff"                   - default settings
+    // "00123456789abcdeff"                           - without delimiter
+    // "00-12-34-56-78-9a-bc-de-ff"                   - with custom delimiter
+    // "0x00-0x12-0x34-0x56-0x78-0x9A-0xBC-0xDE-0xFF" - with custom delimiter, uppercase and showbase
+    //
     static std::string BytesToStr(
         uint8_t* bytes,
         size_t size,
         const char* delimiter = " ",
         bool uppercase = false,
         bool showbase = false);
+
+    //
+    // {0x12, 'a', 'b', 'c', 0x55, 0x00, 0x9A}       --> "abc" // GetStrFromBytes(&bytes[1], 3)
+    // {0x12, 'a', 'b', 'c', 0x00, 0x00, 0x00, 0x00} --> "abc" // GetStrFromBytes(&bytes[1], 6)
+    //
     static std::string GetStrFromBytes(uint8_t* bytes, size_t size);
+
     static std::string PwstrToStr(wchar_t* pwstr);
     static std::string Sprintf(const char* fmt, ...);
 };
