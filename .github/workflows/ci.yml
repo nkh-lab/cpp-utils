@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ '**' ]
+
+jobs:
+  Build-on-Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install libgtest-dev libgmock-dev
+      - name: Build with Tests
+        run: |
+          mkdir build && cd build
+          cmake -Dlibcpputils_BUILD_UTESTS=ON ..
+          make
+      - name: Run Unit Tests
+        run: |
+          build/tests/unit/libcpputils-unit-tests
+
+  Build-on-Windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: microsoft/setup-msbuild@v1.1
+      - name: Build
+        run: |
+          mkdir build && cd build
+          cmake -G "Visual Studio 17 2022" ..
+          cmake --build . --config Release
