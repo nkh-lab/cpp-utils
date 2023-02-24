@@ -11,8 +11,16 @@
 
 #pragma once
 
+//
+// Suppress unused variable error
+//
 #define UNUSED(x) static_cast<void>(x)
 
+//
+// Get array size at compile time
+//
+// int ints[] = {1, 2, 3, 4, 5}; ARRAY_SIZE(ints) --> 5
+//
 template <typename T, size_t N>
 constexpr size_t ARRAY_SIZE(T (&)[N])
 {
