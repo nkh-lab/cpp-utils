@@ -22,9 +22,21 @@ class FileHelper
 public:
     FileHelper() = delete;
 
+    //
+    // Check if the file exists
+    //
     static bool ExistFile(const std::string& file);
 
+    //
+    // Read file to std::stringstream
+    //
     static std::stringstream ReadFile(const std::string& file);
+
+    //
+    // Write std::string to file
+    //
+    // If the file does not exist, it will be created.
+    //
     static void WriteFile(const std::string& file, const std::string& data);
 
     static std::string GetDir(const std::string& file);
