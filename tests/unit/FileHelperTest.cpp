@@ -29,7 +29,7 @@ protected:
     void TearDown() override { std::remove(kFileForTest); }
 };
 
-TEST_F(FileHelperTest, ExistFile_NormalUsage)
+TEST_F(FileHelperTest, CheckFileExistence)
 {
     EXPECT_FALSE(FileHelper::ExistFile(kFileForTest));
 
@@ -38,16 +38,31 @@ TEST_F(FileHelperTest, ExistFile_NormalUsage)
     EXPECT_TRUE(FileHelper::ExistFile(kFileForTest));
 }
 
-TEST_F(FileHelperTest, ReadFile_ReadNonExistent)
+TEST_F(FileHelperTest, ReadNonExistentFile)
 {
     EXPECT_TRUE(FileHelper::ReadFile(kFileForTest).str().empty());
 }
 
-TEST_F(FileHelperTest, ReadFile_WriteFile)
+TEST_F(FileHelperTest, WriteReadFile)
 {
     constexpr char c_str[] = "Hello World!";
 
     FileHelper::WriteFile(kFileForTest, c_str);
 
     EXPECT_STREQ(c_str, FileHelper::ReadFile(kFileForTest).str().c_str());
+}
+
+TEST_F(FileHelperTest, OverwriteFile)
+{
+    constexpr char c_str[] = "Hello World!";
+
+    FileHelper::WriteFile(kFileForTest, c_str);
+
+    EXPECT_STREQ(c_str, FileHelper::ReadFile(kFileForTest).str().c_str());
+
+    constexpr char c_str_new[] = "New content";
+
+    FileHelper::WriteFile(kFileForTest, c_str_new);
+
+    EXPECT_STREQ(c_str_new, FileHelper::ReadFile(kFileForTest).str().c_str());
 }
