@@ -39,8 +39,19 @@ public:
     //
     static void WriteFile(const std::string& file, const std::string& data);
 
+    //
+    // Get directory path from file path
+    //
     static std::string GetDir(const std::string& file);
+
+    //
+    // Get file name from file path
+    //
     static std::string GetFileName(const std::string& file);
+
+    //
+    // Remove file extension from file path
+    //
     static std::string RemoveFileExtension(const std::string& file);
 };
 
