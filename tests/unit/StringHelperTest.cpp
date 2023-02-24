@@ -85,3 +85,10 @@ TEST(StringHelperTest, WstrToStrNullptr)
 
     EXPECT_TRUE(s.empty());
 }
+
+TEST(StringHelperTest, Sprintf)
+{
+    std::string s = StringHelper::Sprintf("bool: %d, int: %d, str: %s", true, 123, "Hello World!");
+
+    EXPECT_STREQ(s.c_str(), "bool: 1, int: 123, str: Hello World!");
+}
