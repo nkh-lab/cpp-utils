@@ -20,7 +20,12 @@
 namespace nkhlab {
 namespace cpputils {
 
-std::string StringHelper::BytesToStr(uint8_t* bytes, size_t size, const char* delimiter, bool uppercase, bool showbase)
+std::string StringHelper::BytesToStr(
+    const uint8_t* bytes,
+    size_t size,
+    const char* delimiter,
+    bool uppercase,
+    bool showbase)
 {
     std::stringstream ss;
 
@@ -38,7 +43,7 @@ std::string StringHelper::BytesToStr(uint8_t* bytes, size_t size, const char* de
     return ss.str();
 }
 
-std::string StringHelper::GetStrFromBytes(uint8_t* bytes, size_t size)
+std::string StringHelper::GetStrFromBytes(const uint8_t* bytes, size_t size)
 {
     size_t actual_str_size{size};
 
@@ -51,10 +56,10 @@ std::string StringHelper::GetStrFromBytes(uint8_t* bytes, size_t size)
         }
     }
 
-    return std::string(std::string(reinterpret_cast<char*>(&bytes[0]), actual_str_size));
+    return std::string(std::string(reinterpret_cast<const char*>(&bytes[0]), actual_str_size));
 }
 
-std::string StringHelper::PwstrToStr(wchar_t* pwstr)
+std::string StringHelper::WstrToStr(const wchar_t* pwstr)
 {
     std::string str = "(null)";
     if (pwstr)

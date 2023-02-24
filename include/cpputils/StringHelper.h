@@ -29,7 +29,7 @@ public:
     // "0x00-0x12-0x34-0x56-0x78-0x9A-0xBC-0xDE-0xFF" - with custom delimiter, uppercase and showbase
     //
     static std::string BytesToStr(
-        uint8_t* bytes,
+        const uint8_t* bytes,
         size_t size,
         const char* delimiter = " ",
         bool uppercase = false,
@@ -39,9 +39,12 @@ public:
     // {0x12, 'a', 'b', 'c', 0x55, 0x00, 0x9A}       --> "abc" // GetStrFromBytes(&bytes[1], 3)
     // {0x12, 'a', 'b', 'c', 0x00, 0x00, 0x00, 0x00} --> "abc" // GetStrFromBytes(&bytes[1], 6)
     //
-    static std::string GetStrFromBytes(uint8_t* bytes, size_t size);
+    static std::string GetStrFromBytes(const uint8_t* bytes, size_t size);
 
-    static std::string PwstrToStr(wchar_t* pwstr);
+    //
+    // L"Hello World!" --> "Hello World!"
+    //
+    static std::string WstrToStr(const wchar_t* pwstr);
     static std::string Sprintf(const char* fmt, ...);
 };
 
