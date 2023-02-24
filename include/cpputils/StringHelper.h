@@ -22,6 +22,8 @@ public:
     StringHelper() = delete;
 
     //
+    // Convert raw bytes to string in hexadecimal presentation
+    //
     // Convert {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF} to:
     // "00 12 34 56 78 9a bc de ff"                   - default settings
     // "00123456789abcdeff"                           - without delimiter
@@ -46,7 +48,11 @@ public:
     //
     // L"Hello World!" --> "Hello World!"
     //
-    static std::string WstrToStr(const wchar_t* pwstr);
+    static std::string WstrToStr(const wchar_t* wstr);
+
+    //
+    // Formatted string
+    //
     static std::string Sprintf(const char* fmt, ...);
 };
 

@@ -59,15 +59,15 @@ std::string StringHelper::GetStrFromBytes(const uint8_t* bytes, size_t size)
     return std::string(std::string(reinterpret_cast<const char*>(&bytes[0]), actual_str_size));
 }
 
-std::string StringHelper::WstrToStr(const wchar_t* pwstr)
+std::string StringHelper::WstrToStr(const wchar_t* wstr)
 {
     std::string str;
 
-    if (pwstr)
+    if (wstr)
     {
         // wide to UTF-8
         std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        str = converter.to_bytes(pwstr);
+        str = converter.to_bytes(wstr);
     }
 
     return str;
