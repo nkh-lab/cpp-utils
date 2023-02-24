@@ -61,7 +61,8 @@ std::string StringHelper::GetStrFromBytes(const uint8_t* bytes, size_t size)
 
 std::string StringHelper::WstrToStr(const wchar_t* pwstr)
 {
-    std::string str = "(null)";
+    std::string str;
+
     if (pwstr)
     {
         // wide to UTF-8

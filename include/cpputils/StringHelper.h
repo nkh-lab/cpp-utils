@@ -22,7 +22,7 @@ public:
     StringHelper() = delete;
 
     //
-    // Converts {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF} to:
+    // Convert {0x00, 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xFF} to:
     // "00 12 34 56 78 9a bc de ff"                   - default settings
     // "00123456789abcdeff"                           - without delimiter
     // "00-12-34-56-78-9a-bc-de-ff"                   - with custom delimiter
@@ -41,6 +41,8 @@ public:
     //
     static std::string GetStrFromBytes(const uint8_t* bytes, size_t size);
 
+    //
+    // Convert wide string to UTF-8
     //
     // L"Hello World!" --> "Hello World!"
     //

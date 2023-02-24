@@ -70,11 +70,18 @@ TEST(StringHelperTest, GetStrFromBytesNullTerminated)
     EXPECT_STREQ(s.c_str(), "abc");
 }
 
-TEST(StringHelperTest, WstrToStr)
+TEST(StringHelperTest, WstrToStrNormalUse)
 {
     constexpr const wchar_t* ws = L"Hello World!";
 
     std::string s = StringHelper::WstrToStr(ws);
 
     EXPECT_STREQ(s.c_str(), "Hello World!");
+}
+
+TEST(StringHelperTest, WstrToStrNullptr)
+{
+    std::string s = StringHelper::WstrToStr(nullptr);
+
+    EXPECT_TRUE(s.empty());
 }
