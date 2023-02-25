@@ -9,8 +9,6 @@
  * but WITHOUT ANY WARRANTY.
  */
 
-#include <cstdio>
-
 #include <gtest/gtest.h>
 
 #include "cpputils/FileHelper.h"
