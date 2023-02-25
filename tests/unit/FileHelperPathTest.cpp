@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-#include "cpputils/FileHelper.h"
+#include "cpp-utils/FileHelper.h"
 
 using namespace nkhlab::cpputils;
 

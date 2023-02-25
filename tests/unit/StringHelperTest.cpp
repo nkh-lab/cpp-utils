@@ -11,8 +11,8 @@
 
 #include <gtest/gtest.h>
 
-#include "cpputils/Macros.h"
-#include "cpputils/StringHelper.h"
+#include "cpp-utils/Macros.h"
+#include "cpp-utils/StringHelper.h"
 
 using namespace nkhlab::cpputils;
 

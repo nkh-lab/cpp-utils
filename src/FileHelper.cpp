@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY.
  */
 
-#include "cpputils/FileHelper.h"
+#include "cpp-utils/FileHelper.h"
 
 #include <fstream>
 

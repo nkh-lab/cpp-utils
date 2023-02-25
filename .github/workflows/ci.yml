@@ -20,7 +20,7 @@ jobs:
           make
       - name: Run Unit Tests
         run: |
-          build/tests/unit/libcpputils-unit-tests
+          build/tests/unit/libcpputils-unit-tests --gtest_repeat=10
 
   Build-on-Windows:
     runs-on: windows-latest

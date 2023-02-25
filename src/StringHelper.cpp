@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY.
  */
 
-#include "cpputils/StringHelper.h"
+#include "cpp-utils/StringHelper.h"
 
 #include <codecvt>
 #include <iomanip>
