@@ -92,3 +92,15 @@ TEST(StringHelperTest, Sprintf)
 
     EXPECT_STREQ(s.c_str(), "bool: 1, int: 123, str: Hello World!");
 }
+
+TEST(StringHelperTest, SprintfLimits)
+{
+    std::string fs(511, '0');
+    fs.append("%d");
+    std::string gs(511, '0');
+    gs.append("1");
+
+    std::string s = StringHelper::Sprintf(fs.c_str(), 1);
+
+    EXPECT_STREQ(s.c_str(), gs.c_str());
+}

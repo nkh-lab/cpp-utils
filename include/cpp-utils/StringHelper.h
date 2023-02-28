@@ -53,7 +53,15 @@ public:
     //
     // Formatted string
     //
-    static std::string Sprintf(const char* fmt, ...);
+    template<typename... Args>
+    static std::string Sprintf(const char* fmt, Args... args)
+    {
+        const int size = std::snprintf(nullptr, 0, fmt, args...) + 1;
+        std::string buf(size, '\0');
+        std::snprintf(&buf[0], size, fmt, args...);
+        buf.resize(size - 1);
+        return buf;
+    }
 };
 
 } // namespace cpputils

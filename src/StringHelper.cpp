@@ -73,18 +73,5 @@ std::string StringHelper::WstrToStr(const wchar_t* wstr)
     return str;
 }
 
-std::string StringHelper::Sprintf(const char* fmt, ...)
-{
-    const int LOG_BUFFER_SIZE = 512;
-
-    char buffer[LOG_BUFFER_SIZE];
-    va_list args;
-    va_start(args, fmt);
-    vsnprintf(buffer, LOG_BUFFER_SIZE - 1, fmt, args);
-    va_end(args);
-
-    return std::string(buffer);
-}
-
 } // namespace cpputils
 } // namespace nkhlab
