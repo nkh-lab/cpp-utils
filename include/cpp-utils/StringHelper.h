@@ -53,7 +53,7 @@ public:
     //
     // Formatted string
     //
-    template<typename... Args>
+    template <typename... Args>
     static std::string Sprintf(const char* fmt, Args... args)
     {
         const int size = std::snprintf(nullptr, 0, fmt, args...) + 1;

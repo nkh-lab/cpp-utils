@@ -44,3 +44,18 @@ TEST(MacrosTest, CustomTypeArraySize)
 
     EXPECT_EQ(5, ARRAY_SIZE(my_array));
 }
+
+TEST(MacrosTest, BaseNameLinux)
+{
+    EXPECT_STREQ(BASENAME_LINUX("/home/user/docs/file.txt"), "file.txt");
+}
+
+TEST(MacrosTest, BaseNameWindows)
+{
+    EXPECT_STREQ(BASENAME_WINDOWS("c:\\user\\docs\\file.txt"), "file.txt");
+}
+
+TEST(MacrosTest, FileName)
+{
+    EXPECT_STREQ(__FILENAME__, "MacrosTest.cpp");
+}
