@@ -12,6 +12,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace nkhlab {
 namespace cpputils {
@@ -62,6 +63,14 @@ public:
         buf.resize(size - 1);
         return buf;
     }
+
+    //
+    // Split a string into strings by delimiter
+    //
+    static std::vector<std::string> SplitStr(
+        const std::string& input,
+        const std::string& delimiter,
+        bool skip_empty = true);
 };
 
 } // namespace cpputils

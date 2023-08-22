@@ -73,5 +73,32 @@ std::string StringHelper::WstrToStr(const wchar_t* wstr)
     return str;
 }
 
+//
+// Split a string into strings by delimiter
+//
+std::vector<std::string> StringHelper::SplitStr(
+    const std::string& input,
+    const std::string& delimiter,
+    bool skip_empty)
+{
+    std::vector<std::string> strings;
+    size_t start = 0, end = 0;
+    std::string sub_str;
+
+    while ((end = input.find(delimiter, start)) != std::string::npos)
+    {
+        sub_str = input.substr(start, end - start);
+        start = end + delimiter.length();
+
+        (skip_empty && sub_str.size() == 0) ? void() : strings.push_back(sub_str);
+    }
+
+    // Add the last substring after the last delimiter
+    sub_str = input.substr(start);
+    (skip_empty && sub_str.size() == 0) ? void() : strings.push_back(sub_str);
+
+    return strings;
+}
+
 } // namespace cpputils
 } // namespace nkhlab

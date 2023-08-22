@@ -104,3 +104,70 @@ TEST(StringHelperTest, SprintfLimits)
 
     EXPECT_STREQ(s.c_str(), gs.c_str());
 }
+
+TEST(StringHelperTest, SplitStr)
+{
+    std::string string_with_spaces("This is a string with spaces");
+    std::string string_with_spaces_extra(" This  is a string     with spaces    ");
+    std::string string_with_commas("This,is,a,string,with,commas");
+    ;
+    std::string string_with_commas_extra(",This,,,,is,,,,a,string,,,with,commas,");
+
+    std::vector<std::string> strings;
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_spaces, " ");
+    EXPECT_EQ(strings.size(), 6);
+    EXPECT_STREQ(strings[0].c_str(), "This");
+    EXPECT_STREQ(strings[1].c_str(), "is");
+    EXPECT_STREQ(strings[2].c_str(), "a");
+    EXPECT_STREQ(strings[3].c_str(), "string");
+    EXPECT_STREQ(strings[4].c_str(), "with");
+    EXPECT_STREQ(strings[5].c_str(), "spaces");
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_spaces, " ", false);
+    EXPECT_EQ(strings.size(), 6);
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_spaces_extra, " ");
+    EXPECT_EQ(strings.size(), 6);
+    EXPECT_STREQ(strings[0].c_str(), "This");
+    EXPECT_STREQ(strings[1].c_str(), "is");
+    EXPECT_STREQ(strings[2].c_str(), "a");
+    EXPECT_STREQ(strings[3].c_str(), "string");
+    EXPECT_STREQ(strings[4].c_str(), "with");
+    EXPECT_STREQ(strings[5].c_str(), "spaces");
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_spaces_extra, " ", false);
+    EXPECT_EQ(strings.size(), 16);
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_commas, ",");
+    EXPECT_EQ(strings.size(), 6);
+    EXPECT_STREQ(strings[0].c_str(), "This");
+    EXPECT_STREQ(strings[1].c_str(), "is");
+    EXPECT_STREQ(strings[2].c_str(), "a");
+    EXPECT_STREQ(strings[3].c_str(), "string");
+    EXPECT_STREQ(strings[4].c_str(), "with");
+    EXPECT_STREQ(strings[5].c_str(), "commas");
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_commas, ",", false);
+    EXPECT_EQ(strings.size(), 6);
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_commas_extra, ",");
+    EXPECT_EQ(strings.size(), 6);
+    EXPECT_STREQ(strings[0].c_str(), "This");
+    EXPECT_STREQ(strings[1].c_str(), "is");
+    EXPECT_STREQ(strings[2].c_str(), "a");
+    EXPECT_STREQ(strings[3].c_str(), "string");
+    EXPECT_STREQ(strings[4].c_str(), "with");
+    EXPECT_STREQ(strings[5].c_str(), "commas");
+
+    strings.clear();
+    strings = StringHelper::SplitStr(string_with_commas_extra, ",", false);
+    EXPECT_EQ(strings.size(), 16);
+}
