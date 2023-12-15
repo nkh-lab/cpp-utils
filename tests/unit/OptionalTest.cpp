@@ -76,29 +76,29 @@ void TestCustomType(T value_to_test, ComparePredicate p)
     EXPECT_FALSE(op2);
 }
 
-TEST(UtilsOptionalTest, BoolTest)
+TEST(OptionalTest, BoolTest)
 {
     TestPrimitives(true);
 }
 
-TEST(UtilsOptionalTest, IntTest)
+TEST(OptionalTest, IntTest)
 {
     TestPrimitives(123);
 }
 
-TEST(UtilsOptionalTest, StringTest)
+TEST(OptionalTest, StringTest)
 {
     TestPrimitives("string");
 }
 
-TEST(UtilsOptionalTest, CustomTypeTest)
+TEST(OptionalTest, CustomTypeTest)
 {
     TestCustomType(CustomType{true, 123, "string"}, [](const CustomType& v1, const CustomType& v2) {
         return v1.b == v2.b && v1.i == v2.i && v1.s == v2.s;
     });
 }
 
-TEST(UtilsOptionalTest, ResetTest)
+TEST(OptionalTest, ResetTest)
 {
     Optional<int> opi;
 
