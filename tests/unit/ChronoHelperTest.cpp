@@ -15,7 +15,7 @@
 
 using namespace nkhlab::cpputils;
 
-TEST(UtilsChronoHelperTest, AllInOne)
+TEST(ChronoHelperTest, AllInOne)
 {
     std::chrono::milliseconds ms{1};
     std::chrono::seconds s{1};
