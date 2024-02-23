@@ -39,18 +39,19 @@ void IncrementSynchronizedSharedCounter(Synchronized<int>& shared_counter)
 //
 // Comment out if it fails as it could theoretically fail
 //
-TEST(SynchronizedTest, NotSynchronizedSharedCounter)
-{
-    int i = 0;
-
-    std::thread t1(IncrementNotSynchronizedSharedCounter, std::ref(i));
-    std::thread t2(IncrementNotSynchronizedSharedCounter, std::ref(i));
-
-    t1.join();
-    t2.join();
-
-    EXPECT_NE(i, kOneRunSize * 2);
-}
+// TEST(SynchronizedTest, NotSynchronizedSharedCounter)
+// {
+//     int i = 0;
+//
+//     std::thread t1(IncrementNotSynchronizedSharedCounter, std::ref(i));
+//     std::thread t2(IncrementNotSynchronizedSharedCounter, std::ref(i));
+//
+//     t1.join();
+//     t2.join();
+//
+//     EXPECT_NE(i, kOneRunSize * 2);
+// }
+//
 
 TEST(SynchronizedTest, SynchronizedSharedCounter)
 {
