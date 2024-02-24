@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2024 https://github.com/nkh-lab
+#
+# This is free software. You can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# version 3 as published by the Free Software Foundation.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY.
+#
+
+# Function to check if clang-format is available
+check_clang_format() {
+    if ! command -v clang-format &> /dev/null; then
+        echo "Error: clang-format is not installed. Please install clang-format or make sure it's in your PATH." >&2
+        exit 1
+    fi
+}
+
+# Function to check if the .clang-format file exists
+check_clang_format_file() {
+    if [ ! -f .clang-format ]; then
+        echo "Error: .clang-format file not found in the repository root." >&2
+        exit 1
+    fi
+}
+
+# Function to check if formatting is correct
+check_formatting() {
+    # Check if clang-format and .clang-format exist
+    check_clang_format
+    check_clang_format_file
+
+    echo "Checking formatting of staged C/C++ files..."
+
+    # Get list of staged files
+    staged_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(c|cpp|h|hpp)$')
+
+    # Flag to track if formatting is correct
+    incorrect_formatting=false
+
+    # Check formatting for each staged file
+    for file in $staged_files; do
+        # Create temporary file with formatted content
+        formatted_content=$(clang-format "$file")
+        tmp_file=$(mktemp)
+        echo "$formatted_content" > "$tmp_file"
+
+        # Compare original file with formatted content
+        if ! diff -q "$file" "$tmp_file" &> /dev/null; then
+            echo "Error: Formatting mismatch in $file. Please run clang-format on the file and stage the changes again." >&2
+            incorrect_formatting=true
+        fi
+
+        # Remove temporary file
+        rm "$tmp_file"
+    done
+
+    # If incorrect formatting found, abort commit
+    if [ "$incorrect_formatting" = true ]; then
+        echo "Commit aborted due to formatting errors. Please fix the formatting and try again." >&2
+        exit 1
+    else
+        echo "Formatting check passed."
+    fi
+}
+
+# Call the main function
+check_formatting
+
+exit 0
